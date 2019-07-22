@@ -9,6 +9,7 @@ const ctx = canvas.getContext('2d');
 const rectMinSize = 10;
 const rectMidSize = 15;
 const rectMaxSize = 20;
+let textBounce = 10;
 const baseBackgroundColor = {
     hex: '#EEEEEE',
     variation: 64,
@@ -71,8 +72,10 @@ function drawRect() {
 function drawRectText() {
     // ctx.fillStyle = '#000000';
     ctx.strokeStyle = '#FFFFFF';
-    const offsetX = 100;
-    const offsetY = 100;
+    const bounceX = Math.round(Math.random() * textBounce);
+    const bounceY = Math.round(Math.random() * textBounce);
+    const offsetX = 10 + bounceX;
+    const offsetY = 10 + bounceY;
     for (let i = 0; i < text.length; i++) {
         const textLetter = text[i];
         let letterArray = letters[textLetter.toUpperCase()];
@@ -106,8 +109,13 @@ function drawRectText() {
                 // ctx.fillStyle = `rgb(${b},${b},${b})`;
                 const x = j % letters._width;
                 const y = Math.floor(j / letters._width);
-                const xPos = offsetX + (i * rectMaxSize * letters._width) + (x * rectMaxSize);
-                const yPos = offsetY + (y * rectMaxSize);
+                let xPos = offsetX + (i * rectMaxSize * letters._width) + (x * rectMaxSize);
+                let yPos = offsetY + (y * rectMaxSize);
+                
+                while(xPos > canvas.width) {
+                    xPos -= canvas.width;
+                    yPos += rectMaxSize * (letters._height + 1);
+                }
                 // const xPos = x * rectMaxSize;
                 // const yPos = y * rectMaxSize;
                 const s = Math.round((Math.random() * (rectMaxSize - rectMinSize)) + rectMinSize);
@@ -126,7 +134,7 @@ const drawTimeInterwal = 100;
 let drawTimeElapsed = 0;
 let previousTime = 0;
 
-let text = 'Hello World';
+let text = 'Glitch Text';
 function loop(time) {
     const bRect = canvas.getBoundingClientRect();
     if (canvas.width != bRect.width || canvas.height != bRect.height) {
