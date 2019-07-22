@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Glitch Text</title>
+    <meta property="og:title" content="Glitch Text">
+    <meta property="og:image" content="./src/thumbnail.png">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #canvas {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        #btn-edit {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 100px;
+            height: 30px;
+        }
+        #config {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            bottom: 30px;
+            left: 30px;
+            background-color: rgba(255, 255, 255, 0.75);
+            padding: 20px;
+            display: none;
+            overflow: auto;
+        }
+        #config.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" ></canvas>
+    <button id="btn-edit" onclick="config.classList.add('visible');" >Edit</button>
+    <div id="config" >
+        Config
+        <p>
+            <label>Text: <input id="inp-text" /></label>
+        </p>
+        <p>
+            <label>Background color: <input id="inp-bg-color" type="color" /></label>
+        </p>
+        <p>
+            <label>Text color: <input id="inp-text-color" type="color" /></label>
+        </p>
+        <br/>
+        <button onclick="config.classList.remove('visible')" >Close</button>
+    </div>
+    <script src="./src/letters.js" ></script>
+    <script src="./src/main.js" ></script>
+</body>
+</html>
